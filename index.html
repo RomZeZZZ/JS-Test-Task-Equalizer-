@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="data:;base64,=">
     <title>Equalizer</title>
 </head>
 <body>
@@ -45,7 +46,8 @@
         <div class="grid-cell" id="cell-1-5"></div>
         <div class="grid-cell" id="cell-1-6"></div>
     </div>
-    <input type="file" id="input" />
+    <label for="input" class="custom-input"> Choose an audio file </label>
+    <input type="file" id="input" accept="audio/*"/>
     <div id="audio-container"></div>
     <script src="./script.js"></script>
 </body>

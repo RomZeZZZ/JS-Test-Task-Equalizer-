@@ -1,20 +1,24 @@
+html {
+    height: 100%;
+}
 body {
-    margin: 10px auto;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 #input {
-padding: 20px;
+    padding: 20px;
+    display: none;
 }
 .grid_container {
-    margin: 10px 0;
+    margin: 20px;
     display: grid;
-    border: 1px solid;
+    border: 5px solid grey;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    margin: auto;
 }
 .grid-cell {
     width: 20px;
@@ -22,4 +26,14 @@ padding: 20px;
     border: 1px solid #333;
     padding: 20px;
     text-align: center;
+}
+.custom-input {
+    display: inline-block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
