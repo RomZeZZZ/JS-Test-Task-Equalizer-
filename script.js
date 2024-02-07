@@ -1,9 +1,7 @@
 'use strict'
 let input = document.getElementById('input')
-console.log(input)
 let audioContainer = document.getElementById('audio-container');
-input.addEventListener('change', (e) => {
-    console.log(input.files[0].type)
+input.addEventListener('change', () => {
     if (input.files[0].type.startsWith('audio/')) {
         let audioPlayer = document.createElement('audio');
         audioPlayer.controls = true;

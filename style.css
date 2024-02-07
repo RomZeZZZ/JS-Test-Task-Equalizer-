@@ -1,4 +1,26 @@
 #input {
-    width: 100px;
-    height: 100px;
+padding: 20px;
+}
+
+.grid_container {
+    margin: 10px 0;
+    display: grid;
+    border: 1px solid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    margin: auto; /* Убирает внешние отступы */
+}
+.grid-cell {
+    width: 20px;
+    height: 5px;
+    border: 1px solid #333;
+    padding: 20px;
+    text-align: center;
+}
+body {
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
