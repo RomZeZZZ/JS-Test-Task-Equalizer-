@@ -1,4 +1,4 @@
-# JS-Test-Task-Equalizer
+# JS-Test-Task-Equalizer-
 Once the file is uploaded, it should be possible to play it. The grid should
 respond to sound waves and display them in some color as in the
 example
