@@ -1,1 +1,1 @@
-# JS-Test-Task-Equalizer-
+# JS-Test-Task-Equalizer
