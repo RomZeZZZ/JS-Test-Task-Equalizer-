@@ -1,20 +1,22 @@
 'use strict'
 let input = document.getElementById('input')
 let audioContainer = document.getElementById('audio-container');
-
-// function colorizeColumns(value) {
-//     const gridCells = document.querySelectorAll('.grid-cell');
-//     const columns = 6;
-//     for (let col = 0; col < columns; col++) {
-//         const height = Math.floor(value / 255 * 6); 
-//         for (let row = 0; row < 6; row++) {
-//             const cellIndex = row * columns + col;
-//             const cell = gridCells[cellIndex];
-//             const backgroundColor = row < height ? `rgba(0, 0, 255, ${value / 255})` : '';
-//             cell.style.backgroundColor = backgroundColor;
-//         }
-//     }
-// }
+let coloumn = 1;
+let isAudioPlaying = false;
+function colorizeColumns(height, coloumn) {
+    if (height === 0) {
+        return
+    }
+    console.log(height, coloumn)
+    for (let i = 1; i <= height; i++) {
+        const cellId = `cell-${i}-${coloumn}`;
+        const cell = document.getElementById(cellId);
+        cell.style.backgroundColor = 'red';
+        setTimeout(() => {
+            cell.style.backgroundColor = '';
+        }, 50);
+    }
+}
 input.addEventListener('change', () => {
     if (input.files[0].type.startsWith('audio/')) {
         let audioPlayer = document.createElement('audio');
@@ -25,27 +27,38 @@ input.addEventListener('change', () => {
         audioPlayer.appendChild(source);
         audioContainer.innerHTML = '';
         audioContainer.appendChild(audioPlayer);
-        // const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        // const analyser = audioContext.createAnalyser();
-        // const sourceNode = audioContext.createMediaElementSource(audioPlayer);
-        // sourceNode.connect(analyser);
-        // analyser.connect(audioContext.destination);
-        // analyser.fftSize = 32;
-        // const bufferLength = analyser.frequencyBinCount;
-        // const dataArray = new Uint8Array(bufferLength);
-        // function updateVisualizer() {
-        //     analyser.getByteFrequencyData(dataArray);
-        //     dataArray.forEach((value, index) => {
-        //         const scale = value / 255; 
-        //         const minScale = 0.2; 
-        //         const maxScale = 1.0; 
-        //         const height = Math.floor(minScale + scale * (maxScale - minScale) * 6);
-        //         colorizeColumns(value)
-        //         requestAnimationFrame(updateVisualizer);
-        //     });
-        //     requestAnimationFrame(updateVisualizer);
-        // }
-        // updateVisualizer();
+        const audioContext = new (window.AudioContext || window.AudioContext)();
+        const analyser = audioContext.createAnalyser();
+        const sourceNode = audioContext.createMediaElementSource(audioPlayer);
+        sourceNode.connect(analyser);
+        analyser.connect(audioContext.destination);
+        analyser.fftSize = 32;
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+        audioPlayer.addEventListener('play', () => {
+            isAudioPlaying = true
+            requestAnimationFrame(updateVisualizer);
+        })
+        audioPlayer.addEventListener('pause', () => {
+            isAudioPlaying = false
+            cancelAnimationFrame(updateVisualizer);
+        })
+        function updateVisualizer() {
+            requestAnimationFrame(updateVisualizer);
+            analyser.getByteFrequencyData(dataArray);
+            dataArray.forEach((value) => {
+                const scale = value / 255; 
+                const minScale = 0.2; 
+                const maxScale = 1.0; 
+                const height = Math.floor(minScale + scale * (maxScale - minScale) * 6);
+                if (coloumn === 6) {
+                    coloumn = 1
+                } else {
+                    coloumn++
+                } 
+                colorizeColumns(height, coloumn)
+            });
+        }
     } else {
         alert('Its not audio file')
     }
