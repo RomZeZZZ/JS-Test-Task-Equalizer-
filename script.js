@@ -7,7 +7,6 @@ function colorizeColumns(height, coloumn) {
     if (height === 0) {
         return
     }
-    console.log(height, coloumn)
     for (let i = 1; i <= height; i++) {
         const cellId = `cell-${i}-${coloumn}`;
         const cell = document.getElementById(cellId);
